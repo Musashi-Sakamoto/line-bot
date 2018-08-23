@@ -1,0 +1,15 @@
+{
+  "name": "node-typescript-lambda",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.11",
+    "@types/node": "^10.7.1",
+    "serverless-offline": "^3.25.9",
+    "serverless-plugin-typescript": "^1.1.5"
+  },
+  "dependencies": {
+    "@line/bot-sdk": "^6.2.1"
+  }
+}
