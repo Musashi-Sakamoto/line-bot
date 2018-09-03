@@ -1,5 +1,5 @@
 import { Handler, Context, Callback } from "aws-lambda";
-import { Client, TextMessage } from "@line/bot-sdk";
+import { Client, TextMessage, FlexMessage } from "@line/bot-sdk";
 import * as crypto from "crypto";
 import * as Axios from "axios";
 
@@ -70,10 +70,51 @@ const hello: Handler = (event: any, context: Context, callback: Callback) => {
           return Promise.resolve(video.video_url);
         })
         .then(url => {
-          const message: TextMessage = {
-            type: "text",
-            text: url
-          };
+          const message: FlexMessage = {
+            "type": "flex",
+            "altText": "This is a Flex Message",
+            "contents": {
+                "type": "bubble",
+                "header": {
+                  "type": "box",
+                  "layout": "vertical",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "header"
+                    }
+                  ]
+                },
+                "hero": {
+                  "type": "image",
+                  "url": "https://example.com/flex/images/image.jpg",
+                  "size": "full",
+                  "aspectRatio": "2:1"
+                },
+                "body": {
+                  "type": "box",
+                  "layout": "vertical",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "body"
+                    }
+                  ]
+                },
+                "footer": {
+                  "type": "box",
+                  "layout": "vertical",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "footer"
+                    }
+                  ]
+                }
+              }
+              
+            }
+          
           return client.replyMessage(body.events[0].replyToken, message);
         })
         .then(_ => {
